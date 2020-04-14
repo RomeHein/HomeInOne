@@ -31,14 +31,21 @@ This porject fits perfectly a Raspberry Pi. To make it even more resiliant, Home
 There is four ways to install HomeInOne:
 
 ### The user way (coming soon): 
+Prerequisites: just your raspberry pi, with an SD card.
+
 Install directly HomeInOne image on your raspberry pi. It's the last version of Raspbian with everything correctly set up inside. 
 
 ### The production way: Ansible
-First, you'll need Ansible installed on your computer. Then clone this repo on your machine, and simply cd to the ansible directory of the project:
+Prerequisites: 
+- Raspbian installed on your raspberry
+- SSH access to it
+- Ansible installed on your dev machine
+
+Once Ansible installed on your computer, clone the repo on your machine, and simply cd to the ansible directory of the project:
 ```cd /ansible```
 Then all you have to do is run the following command in your terminal:
 ```ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook homeIn1.yml -i raspberrypi.local, --user=pi --ask-pass```
-This command will install all the necessary tools on your raspberry pi.
+This command will install all the necessary tools on your raspberry pi. It will then reboot and run the HomeInOne process in a docker image.
 
 You can also ask the playbook to install for you the PiModule:
 ```
@@ -50,6 +57,12 @@ ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook homeIn1.yml -i raspberrypi.loca
 ```
 
 ### The docker way:
+Prerequisites: 
+- Raspbian installed on your raspberry
+- SSH access to it
+- Docker and docker-compose installed on your raspberry pi
+- Node.js installed on your raspberry pi
+
 You may want to run docker images on your raspberry pi without running the ansible scripts.
 In that case you can clone the repo wherever you want on your raspberry pi and then build the docker image manually from the project folder:
 ```
@@ -68,6 +81,10 @@ psql postgres://hiouser:Homein1IsAnOpensourceDomoticProject4yourRP3@localhost:35
 ```
 
 ### The developer way.
+Prerequisites: 
+- Node.js installed on your dev machine
+- A postgreSQL database running on your dev machine
+
 You may also want to run the project on your local machine for dev purposes. This is possible, but keep in mind that you won't be able to use gpios (since I hope for you, you are not developing on a raspberry pi). 
 You'll need a postgres database running and accessible.
 You'll also need an `.env` file. You can use the one below and change the variables to fit your configuration: 

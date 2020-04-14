@@ -20,9 +20,9 @@ On top of that, a MQTT broker and Telegram Bot. That's all.
 To make thinks easier to set up, everything runs on docker and can be installed via Ansible.
 
 Here is a sum up of the project architecture .
-<div>
-    <img src="images/controls.png" width="400">
-</div>
+<p align="center">
+    <img src="images/Project architecture.png" width="500" style="float:middle;">
+</p>
 
 ## Installation
 
@@ -30,9 +30,10 @@ This porject fits perfectly a Raspberry Pi. To make it even more resiliant, Home
 
 There is four ways to install HomeInOne:
 
-- The user way (coming soon): Install directly HomeInOne image on your raspberry pi. It's the last version of Raspbian with everything correctly set up inside. 
+### The user way (coming soon): 
+Install directly HomeInOne image on your raspberry pi. It's the last version of Raspbian with everything correctly set up inside. 
 
-- The production way: Ansible
+### The production way: Ansible
 First, you'll need Ansible installed on your computer. Then clone this repo on your machine, and simply cd to the ansible directory of the project:
 ```cd /ansible```
 Then all you have to do is run the following command in your terminal:
@@ -40,23 +41,33 @@ Then all you have to do is run the following command in your terminal:
 This command will install all the necessary tools on your raspberry pi.
 
 You can also ask the playbook to install for you the PiModule:
-```ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook homeIn1.yml -i raspberrypi.local, --user=pi --ask-pass -e "pi_module=true"```
+```
+ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook homeIn1.yml -i raspberrypi.local, --user=pi --ask-pass -e "pi_module=true"
+```
 And/or also transform your raspberry pi into an access point, in that case you should specify the wifi password of the raspberry pi wifi:
-```ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook homeIn1.yml -i raspberrypi.local, --user=pi --ask-pass -e "access_point=true" "wifi_password=ChangeMe"```
+```
+ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook homeIn1.yml -i raspberrypi.local, --user=pi --ask-pass -e "access_point=true" "wifi_password=ChangeMe"
+```
 
-- The docker way:
+### The docker way:
 You may want to run docker images on your raspberry pi without running the ansible scripts.
 In that case you can clone the repo wherever you want on your raspberry pi and then build the docker image manually from the project folder:
-```sudo docker build -t homeinone .```
+```
+sudo docker build -t homeinone .
+```
 Then I strongly recommand using the docker-compose file present [here](ansible/roles/homeIn1/templates/docker-compose.yml.j2)
 and replace all variables with the appropriate ones.
 Once done you'll just have to run the command:
-```sudo docker-compose up -d```
+```
+sudo docker-compose up -d
+```
 
 Note that once everything running, you can mannualy connect to the postgres db over docker via the following command:
-```psql postgres://hiouser:Homein1IsAnOpensourceDomoticProject4yourRP3@localhost:35432/hio```
+```
+psql postgres://hiouser:Homein1IsAnOpensourceDomoticProject4yourRP3@localhost:35432/hio
+```
 
-- And the developer way.
+### The developer way.
 You may also want to run the project on your local machine for dev purposes. This is possible, but keep in mind that you won't be able to use gpios (since I hope for you, you are not developing on a raspberry pi). 
 You'll need a postgres database running and accessible.
 You'll also need an `.env` file. You can use the one below and change the variables to fit your configuration: 

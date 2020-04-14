@@ -53,7 +53,7 @@ IF (test != 2) THEN RETURN 30;
 END IF;
 -- Check if basic user_status are present
 select COUNT(*) from home.user_status into test;
-IF (test != 3) THEN RETURN 31;
+IF (test != 4) THEN RETURN 31;
 END IF;
 
 RETURN 0;

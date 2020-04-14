@@ -81,8 +81,9 @@ INSERT INTO "role" (role_id, role_label, role_is_admin) VALUES (2, 'Guest', fals
 
 -- Insert default status
 INSERT INTO user_status (status_id, status_label) VALUES (1, 'Pending') ON CONFLICT (status_id) DO NOTHING;
-INSERT INTO user_status (status_id, status_label) VALUES (2, 'Blocked') ON CONFLICT (status_id) DO NOTHING;
-INSERT INTO user_status (status_id, status_label) VALUES (3, 'Deleted') ON CONFLICT (status_id) DO NOTHING;
+INSERT INTO user_status (status_id, status_label) VALUES (2, 'Pending') ON CONFLICT (status_id) DO NOTHING;
+INSERT INTO user_status (status_id, status_label) VALUES (3, 'Blocked') ON CONFLICT (status_id) DO NOTHING;
+INSERT INTO user_status (status_id, status_label) VALUES (4, 'Deleted') ON CONFLICT (status_id) DO NOTHING;
 
 -- Insert system default preference
 

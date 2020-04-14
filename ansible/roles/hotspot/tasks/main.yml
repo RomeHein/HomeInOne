@@ -1,0 +1,21 @@
+---
+- name: Install required software packages
+  apt:
+    name: hostapd
+    state: present
+
+- name: download hostapd gui
+  get_url: url={{ raspapurl }} dest=/tmp/raspap
+
+- name: Run hostapd gui installation
+  command: bash /tmp/raspap -y
+
+- name: Update hostapd settings
+  template:
+    src: hostapd.conf.j2
+    dest: /etc/hostapd/hostapd.conf
+
+- name: Remove temporary file
+  file:
+    path: /tmp/raspap
+    state: absent

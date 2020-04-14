@@ -1,0 +1,53 @@
+version: "3"
+services:
+  app:
+    image: homeinone
+    restart: always
+    privileged: true
+    user: root
+    depends_on:
+      - postgres
+    environment:
+      db: {{db_name}} 
+      dbSchema: {{db_schema}} 
+      dbUser: {{db_user}}
+      dbUserPassword: {{db_password}}
+      dbHost: postgres
+      dbPort: 5432
+      apiPort: {{api_port}}
+      apiAddress: http://{{ansible_default_ipv4.address}}:{{api_port}}/api/
+      telegramToken: {{telegram_token}}
+      piModule: {{pi_module}}
+      autoMigrate: true
+      TZ: {{process_timezone}}
+    devices:
+      - /dev/vcsm:/dev/vcsm
+      - /dev/vchiq:/dev/vchiq
+      - /dev/i2c-0:/dev/i2c-0
+      - /dev/i2c-1:/dev/i2c-1
+    ports:
+      - "{{api_port}}:{{api_port}}"
+      - "9229:9229"
+    volumes:
+      - /sys:/sys
+      - /dev/mem:/dev/mem
+      - .:/opt/app
+      - /opt/app/node_modules
+    command:
+      - node
+      - "--inspect-brk=0.0.0.0"
+      - "."
+  postgres:
+    image: postgres:alpine
+    restart: always
+    ports:
+      - "35432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: {{db_user}}
+      POSTGRES_PASSWORD: {{db_password}}
+      POSTGRES_DB: {{db_name}}
+      POSTGRES_SCHEMA: {{db_schema}}
+volumes:
+  db:

@@ -1,0 +1,679 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the API documentation for your HomeInOne server",
+    "version": "1.0.0",
+    "title": "HomeInOne",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@hio.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:7070",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "actionnable",
+      "description": "All action related calls"
+    },
+    {
+      "name": "schedule",
+      "description": "Schedule actions"
+    },
+    {
+      "name": "user",
+      "description": "Operations about user"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/actionnables": {
+      "get": {
+        "tags": [
+          "actionnable"
+        ],
+        "summary": "Returns all actionnables",
+        "operationId": "getActionnables",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Actionnable"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/actionnable": {
+      "post": {
+        "tags": [
+          "actionnable"
+        ],
+        "summary": "Add a new actionnable",
+        "description": "",
+        "operationId": "addActionnable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Actionnable object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Actionnable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Actionnable"
+            }
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "actionnable"
+        ],
+        "summary": "Update an existing actionnable",
+        "description": "",
+        "operationId": "updateActionnable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Actionnable object that needs to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Actionnable"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Actionnable not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/actionnable/{id}": {
+      "get": {
+        "tags": [
+          "actionnable"
+        ],
+        "summary": "Finds actionnable",
+        "description": "",
+        "operationId": "findActionnable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Actionnable id to look for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Actionnable"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      }
+    },
+    "/actionnable/switch/{id}": {
+      "get": {
+        "tags": [
+          "actionnable"
+        ],
+        "summary": "Switch an actionnable state",
+        "description": "An actionnable in 'on' state will switch to 'off' state",
+        "operationId": "switchActionnable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Actionnable id to look for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Actionnable"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      }
+    },
+    "/actionnable/switch/{id}/{state}": {
+      "get": {
+        "tags": [
+          "actionnable"
+        ],
+        "summary": "Switch an actionnable to the given state",
+        "description": "",
+        "operationId": "switchActionnableToState",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Actionnable id to look for",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "in": "path",
+            "description": "Actionnable state to switch to",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Actionnable"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      }
+    },
+    "/schedule": {
+      "post": {
+        "tags": [
+          "schedule"
+        ],
+        "summary": "Add a new schedule",
+        "description": "An existing actionnable id need to be profided in order to success",
+        "operationId": "addSchedule",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Schedule object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "schedule"
+        ],
+        "summary": "Update an existing schedule",
+        "description": "",
+        "operationId": "updateSchedule",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Schedule object that needs to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Actionnable"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Schedule not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/schedule/{id}": {
+      "delete": {
+        "tags": [
+          "schedule"
+        ],
+        "summary": "Delete a given schedule",
+        "description": "",
+        "operationId": "deleteSchedule",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Schedule id to be deleted",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Returns all users",
+        "operationId": "getUsers",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add a new user",
+        "description": "",
+        "operationId": "addUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update an existing user",
+        "description": "",
+        "operationId": "updateUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Actionnable object that needs to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Actionnable not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Finds a user by its id",
+        "description": "",
+        "operationId": "getUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User id to look for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      }
+    },
+    "/user/telegram/{id}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Finds a user by its telegram id",
+        "description": "",
+        "operationId": "getUserByTelegramId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User telegram id to look for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid telegram ID supplied"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Actionnable": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "integer",
+          "format": "int8",
+          "enum": [ -1, 0, 1 ],
+          "description": "-1 means the actionnable is under scheduling supervision."
+        },
+        "source": {
+          "type": "string",
+          "enum": [ "pimodule", "onboard", "api", "mqtt" ],
+          "description": "'onboard' will trigger gpios from raspberry pi."
+        },
+        "mode": {
+          "type": "integer",
+          "format": "int8"
+        },
+        "type": {
+          "type": "string",
+          "enum": [ "switch", "impulse", "servo" ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "configuration": {
+          "$ref": "#/definitions/Configuration"
+        },
+        "offIcon": {
+          "type": "string",
+          "description": "The icon to be displayed when the action is off"
+        },
+        "onIcon": {
+          "type": "string",
+          "description": "The icon to be displayed when the action is on"
+        }
+      }
+    },
+    "Configuration": {
+      "type": "object",
+      "description": "Define an actionnable configuration. Depending on its source type, some of these properties can be omited.",
+      "properties": {
+        "pin": {
+          "type": "integer",
+          "format": "int8",
+          "description": "Only required for 'onboard' source type actionnables"
+        },
+        "topic": {
+          "type": "string",
+          "description": "Only required for 'mqtt' source type actionnables"
+        },
+        "onValue": {
+          "type": "integer"
+        },
+        "offValue": {
+          "type": "integer"
+        },
+        "writeUrl": {
+          "type": "string",
+          "description": "Only required for 'api' source type actionnables"
+        },
+        "readUrl": {
+          "type": "string",
+          "description": "Only required for 'api' source type actionnables"
+        },
+        "method": {
+          "type": "string",
+          "description": "Only required for 'api' source type actionnables",
+          "enum": [ "POST", "GET" ]
+        },
+        "onPayload": {
+          "type": "integer",
+          "description": "Only required for 'api' source type actionnables"
+        },
+        "offPayload": {
+          "type": "integer",
+          "description": "Only required for 'api' source type actionnables"
+        },
+        "readPayloadPath": {
+          "type": "string",
+          "description": "Only required for 'api' source type actionnables"
+        }
+      }
+    },
+    "Schedule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "actionId": {
+          "type": "string",
+          "description": "Reference an actionnable id"
+        },
+        "days": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "description": "1 representing monday"
+          },
+          "enum": [ 1, 2, 3, 4, 5, 6, 7, 0 ]
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Start hour (not a date)"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "End hour (not a date)"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/Role"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "telegramId": {
+          "type": "string"
+        },
+        "telegramName": {
+          "type": "string"
+        },
+        "startDateAccess": {
+          "type": "string"
+        },
+        "endDateAccess": {
+          "type": "string"
+        }
+      }
+    },
+    "Role": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "label": {
+          "type": "string"
+        },
+        "isAdmin": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "Status": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

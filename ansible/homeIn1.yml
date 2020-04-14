@@ -1,0 +1,29 @@
+- name: Setup your raspberry as HomeIn1 
+  hosts: all
+  become: yes
+  roles:
+    - role: setup
+      tags: setup
+    - role: pimodule
+      tags: pimodule
+      when: pi_module
+    - role: homeIn1
+      tags: homeIn1
+    - role: hotspot
+      tags: hotspot
+      when: access_point
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: Reboot Raspberry Pi
+      shell: "sleep 5 && reboot now"
+      async: 1
+      poll: 0
+
+    - name: Congratulations!
+      debug:
+        msg: Your Raspberry Pi is ready
+
+    
+      

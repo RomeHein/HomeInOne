@@ -1,0 +1,10 @@
+---
+db_user: hiouser
+db_name: hio
+db_password: Homein1IsAnOpensourceDomoticProject4yourRP
+db_schema: home
+api_port: 7070
+telegram_token: test:AAGtestA
+pi_module: 1
+debug_container: 0
+process_timezone: Europe/Amsterdam

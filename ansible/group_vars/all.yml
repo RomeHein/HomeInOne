@@ -1,0 +1,7 @@
+---
+hostname: homeinone
+access_point: false
+pi_module: false
+RASPICONFIG:
+  CAMERA: true
+  I2C: true

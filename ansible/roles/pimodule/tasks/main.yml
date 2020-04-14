@@ -1,0 +1,35 @@
+---
+- name: Install required software packages for PiModule
+  apt:
+    name: ['python-rpi.gpio', 'python-dev', 'python-serial', 'python-smbus', 'python-jinja2', 'python-xmltodict', 'python-psutil', 'python-pip']
+    state: present
+
+- name: Get updated files from git repository 
+  git: 
+    repo: "https://github.com/modmypi/PiModules.git"
+    dest: /opt/PiModules
+
+- name: Install Email broadcasting package
+  command:
+    cmd: python setup.py install
+    chdir: /opt/PiModules/code/python/package
+
+- name: Install the System Monitoring & File Safe Shutdown Daemons
+  command:
+    cmd: python setup.py install
+    chdir: /opt/PiModules/code/python/upspico/picofssd
+
+- name:  Install to the SysVInit system
+  command:
+    cmd: update-rc.d picofssd defaults
+    chdir: /opt/PiModules/code/python/upspico/picofssd
+
+- name: Run at boot time
+  command:
+    cmd: update-rc.d picofssd enable
+    chdir: /opt/PiModules/code/python/upspico/picofssd
+
+- name: Clean install packages
+  file:
+    path: /opt/PiModules
+    state: absent

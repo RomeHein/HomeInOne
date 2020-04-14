@@ -1,7 +1,6 @@
 SET search_path TO ${schema~};
 SELECT 
     a.action_id,
-    a.action_device,
     a.action_state,
     a.action_mode,
     a.action_source,

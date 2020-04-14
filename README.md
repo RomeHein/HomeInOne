@@ -91,7 +91,8 @@ You'll also need an `.env` file. You can use the one below and change the variab
 
 ```
 node_env=development
-telegramToken= YourTelegramTokenHereFromBotFather
+# Uncomment the following line if you want to enable the Telegram bot
+# telegramToken= YourTelegramTokenHereFromBotFather 
 dbUser=hioUser
 dbUserPassword=Homein1IsAnOpensourceDomoticProject4yourRP
 db=hio
@@ -117,7 +118,9 @@ When running for the first time, the project will initiate the db for you. But n
 You can do it manually with this sql exemple:
 ```
 SET search_path TO home;
-INSERT INTO "user" (user_id, user_role_id, user_telegram_id, user_telegram_name) VALUES (1, 1, 42424242, 'YourTelegramName');
+
+-- Insert Admin user
+INSERT INTO "user" (user_id, user_role_id, user_status_id user_telegram_id, user_telegram_name) VALUES (1, 1, 1, 42424242, 'YourTelegramName');
 
 -- Insert action linked to Raspberry pi gpio
 INSERT INTO actionnable (action_id, action_state, action_mode, action_source, action_conf, action_type, action_title, action_on_icon, action_off_icon) VALUES ('Gpio linked device', 0, 1, 'onboard', '{"pin": 0, "onValue":1, "offValue": 0}', 'switch', 'Label for device', '1F512', '1F513');

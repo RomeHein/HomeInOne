@@ -103,7 +103,7 @@ apiPort=7070
 mqttAddress=mqtt://localhost
 mqttPort=1883
 autoMigrate=true
-systemName=BagheeHome
+systemName=HomeInOne
 TZ=Europe/Amsterdam
 ```
 

@@ -1,7 +1,7 @@
 ---
 - name: Get updated files from git repository 
   git: 
-    repo: "https://RomeHein:{{repo_password | urlencode}}@bitbucket.org/RomeHein/bagheebot.git"
+    repo: "https://github.com/RomeHein/HomeInOne.git"
     dest: /opt/homeinone
 
 - name: build the image

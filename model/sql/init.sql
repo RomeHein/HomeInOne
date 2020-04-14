@@ -44,7 +44,7 @@ CREATE TABLE if not exists device (
 
 CREATE TABLE if not exists actionnable (
     action_id TEXT NOT NULL PRIMARY KEY,
-    action_device_id SERIAL REFERENCES device (device_id) ON DELETE CASCADE,
+    action_device_id INTEGER REFERENCES device (device_id) ON DELETE CASCADE,
     action_state INTEGER,
     action_source TEXT, -- Can be 'onboard', 'pimodule', 'api', 'mqtt'
     action_mode INTEGER, -- 0 means it's an action. 1 is a listener. -1 means the scheduler will handle it

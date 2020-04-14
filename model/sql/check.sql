@@ -23,8 +23,8 @@ where table_name = 'user_status' and (column_name = 'status_id' OR column_name =
 IF (test != 2) THEN RETURN 23;
 END IF;
 select COUNT(*) from INFORMATION_SCHEMA.COLUMNS 
-where table_name = 'user' and (column_name = 'user_id' OR column_name = 'user_role_id' OR column_name = 'user_telegram_id' OR column_name = 'user_telegram_name' OR column_name = 'user_start_date' OR column_name = 'user_end_date' OR column_name = 'user_deletion_date') into test;
-IF (test != 7) THEN RETURN 24;
+where table_name = 'user' and (column_name = 'user_id' OR column_name = 'user_role_id' OR column_name = 'user_status_id' OR column_name = 'user_telegram_id' OR column_name = 'user_telegram_name' OR column_name = 'user_start_date' OR column_name = 'user_end_date' OR column_name = 'user_deletion_date') into test;
+IF (test != 8) THEN RETURN 24;
 END IF;
 select COUNT(*) from INFORMATION_SCHEMA.COLUMNS 
 where table_name = 'device' and (column_name = 'device_id' OR column_name = 'device_label' OR column_name = 'device_type') into test;

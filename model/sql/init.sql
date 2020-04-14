@@ -32,7 +32,7 @@ CREATE TABLE if not exists "user" (
     user_telegram_name TEXT,
     user_start_date TIMESTAMP,
     user_end_date TIMESTAMP,
-    user_status INTEGER REFERENCES user_status (status_id) ON DELETE SET DEFAULT ON UPDATE CASCADE,
+    user_status_id INTEGER REFERENCES user_status (status_id) ON DELETE SET DEFAULT ON UPDATE CASCADE,
     user_deletion_date TIMESTAMP
 );
 

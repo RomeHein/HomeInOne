@@ -1,7 +1,6 @@
 require('dotenv').config()
 const C = require('./model/Connector')
 const ActionnableController = require('./Hardware/ActionnableController')
-const piModuleHelper = require('./Hardware/Hardware').piModule
 
 // Set globally the connector to make db request
 global.Connector = new C()
@@ -31,7 +30,7 @@ const start = async (retried) => {
     }
     if (process.env.piModule) {
       // Indicates everything ran swoothly
-      piModuleHelper.switchLed('green', 1)
+      require('./Hardware/Hardware').piModule.switchLed('green', 1)
     }
   } catch (err) {
     console.log(err.message)

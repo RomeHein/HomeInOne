@@ -1,7 +1,7 @@
 {
   "name": "homein1",
   "version": "1.0.0",
-  "description": "A telegram bot to remotely control our sweet home",
+  "description": "A node js app to control your iot devices",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://RomeHein@bitbucket.org/RomeHein/bagheebot.git"
+    "url": "git+https://github.com/RomeHein/HomeInOne.git"
   },
   "keywords": [
     "home",
@@ -20,7 +20,7 @@
   ],
   "author": "Romain Cayzac",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/RomeHein/bagheebot#readme",
+  "homepage": "https://github.com/RomeHein/HomeInOne#readme",
   "dependencies": {
     "aedes": "^0.40.1",
     "async-mqtt": "^2.5.0",

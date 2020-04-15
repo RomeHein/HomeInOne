@@ -142,6 +142,12 @@ INSERT INTO schedule (action_id, schedule_start_hour, schedule_end_hour,  schedu
 
 Api is available on localhost/doc once the process launched. You can have a look to the swagger definition in the api folder of the project.
 
+## Work in progress
+
+- Autosettings: make a mqtt topic to handle automatic settings of devices.
+- Web interface in Vue.js
+- Integration and unit tests!!!
+
 ## Authors
 
 * **Romain Cayzac** - *Initial work*
